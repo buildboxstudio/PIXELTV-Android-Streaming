@@ -2,6 +2,13 @@
 
 PIXELTV - Android TV & Mobile streaming app with built-in ad blocker, multi-site support, bookmark, history, and D-pad navigation. Features draggable floating menu, modern glassmorphism UI, and fullscreen video handler. Built with Kotlin + WebView.
 
+<img width="1878" height="876" alt="image" src="https://github.com/user-attachments/assets/37b6d38e-5f0e-4e61-92c8-46e649ded32c" />
+
+<img width="1878" height="876" alt="image" src="https://github.com/user-attachments/assets/ebe6bcf0-c1c7-4c4d-a6df-36d24defeb96" />
+
+<img width="1878" height="876" alt="image" src="https://github.com/user-attachments/assets/ea2a6b57-3a3d-47e8-abc5-e2bff142fc53" />
+
+
 **Version:** 1.5.1  
 **Build by:** [Buildbox Studio](https://www.tiktok.com/@buildbox.studio)
 
