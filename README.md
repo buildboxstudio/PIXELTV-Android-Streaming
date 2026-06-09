@@ -5,6 +5,16 @@ PIXELTV - Android TV & Mobile streaming app with built-in ad blocker, multi-site
 **Version:** 2.2.0  
 **Build by:** [Buildbox Studio](https://www.tiktok.com/@buildbox.studio)
 
+<img width="1158" height="540" alt="image" src="https://github.com/user-attachments/assets/682addf6-7e01-4770-9f57-6f31cc47c4f3" />
+
+<img width="1158" height="540" alt="image" src="https://github.com/user-attachments/assets/f6d5611c-0042-4771-b179-a887e41b2aa9" />
+
+<img width="1158" height="540" alt="image" src="https://github.com/user-attachments/assets/92efa5c5-a0cf-4486-9980-e7df95858097" />
+
+<img width="1158" height="540" alt="image" src="https://github.com/user-attachments/assets/9bb8d971-8080-4550-97bc-2216fecd63e8" />
+
+
+
 ---
 
 ## 🇬🇧 English
@@ -57,12 +67,6 @@ PIXELTV - Android TV & Mobile streaming app with built-in ad blocker, multi-site
 | Tap ▶ button | Open menu |
 | Drag ▶ button | Move button |
 | Long press ▶ | Quick bookmark |
-
-### Build
-
-1. Open `StreamTV` folder in **Android Studio**
-2. Wait for Gradle sync
-3. Run on device/emulator (Android TV or Phone)
 
 ### Minimum Requirements
 
@@ -122,12 +126,6 @@ PIXELTV - Android TV & Mobile streaming app with built-in ad blocker, multi-site
 | Tap tombol ▶ | Buka menu |
 | Drag tombol ▶ | Pindahkan button |
 | Long press ▶ | Quick bookmark |
-
-### Build
-
-1. Buka folder `StreamTV` di **Android Studio**
-2. Tunggu Gradle sync
-3. Run di device/emulator
 
 ---
 
