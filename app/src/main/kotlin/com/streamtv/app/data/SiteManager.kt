@@ -14,7 +14,8 @@ object SiteManager {
     val sites = listOf(
         StreamingSite("iDlix", "https://z1.idlixku.com", "🎬"),
         StreamingSite("LK21", "https://tv10.lk21official.cc", "🎥"),
-        StreamingSite("Rebahin", "https://rebahinxxi3.beauty/", "📺")
+        StreamingSite("Rebahin", "https://rebahinxxi3.beauty/", "📺"),
+        StreamingSite("Nobargasi", "https://www.nobargasi.my.id", "🍿")
     )
 
     fun getSiteByName(name: String): StreamingSite? {

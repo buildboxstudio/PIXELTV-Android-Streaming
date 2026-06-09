@@ -27,9 +27,9 @@
     style.innerHTML = `
         .pixeltv-highlight {
             position: absolute;
-            border: 3px solid #FFD700;
+            border: 3px solid #E50914;
             border-radius: 8px;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5), inset 0 0 10px rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 20px rgba(229, 9, 20, 0.6), inset 0 0 10px rgba(229, 9, 20, 0.15);
             pointer-events: none;
             z-index: 999999;
             transition: all 0.15s ease-out;
@@ -38,8 +38,8 @@
             position: absolute;
             top: -24px;
             left: 4px;
-            background: #FFD700;
-            color: #000;
+            background: #E50914;
+            color: #fff;
             font-size: 10px;
             font-weight: bold;
             padding: 2px 6px;

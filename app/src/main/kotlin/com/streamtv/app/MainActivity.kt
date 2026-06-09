@@ -92,10 +92,12 @@ class MainActivity : Activity() {
             onBookmarkCurrent = { bookmarkCurrentPage() }
         )
 
-        // Gesture detector for swipe
+        // Gesture detector for swipe — high threshold to avoid accidental triggers
         gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
-            private val SWIPE_THRESHOLD = 100
-            private val SWIPE_VELOCITY = 100
+            // Threshold dinaikkan jauh: butuh swipe panjang & cepat
+            private val SWIPE_THRESHOLD = 250        // jarak minimal (px) — sebelumnya 100
+            private val SWIPE_VELOCITY = 1200        // kecepatan minimal — sebelumnya 100
+            private val DIRECTION_RATIO = 2.5f       // arah harus dominan (horizontal vs vertical)
 
             override fun onFling(
                 e1: MotionEvent?,
@@ -103,11 +105,16 @@ class MainActivity : Activity() {
                 velocityX: Float,
                 velocityY: Float
             ): Boolean {
-                val diffX = (e2.x) - (e1?.x ?: 0f)
-                val diffY = (e2.y) - (e1?.y ?: 0f)
+                if (e1 == null) return false
 
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    if (Math.abs(diffX) > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY) {
+                val diffX = e2.x - e1.x
+                val diffY = e2.y - e1.y
+                val absX = Math.abs(diffX)
+                val absY = Math.abs(diffY)
+
+                // Horizontal swipe — harus benar-benar dominan horizontal
+                if (absX > absY * DIRECTION_RATIO) {
+                    if (absX > SWIPE_THRESHOLD && Math.abs(velocityX) > SWIPE_VELOCITY) {
                         if (diffX > 0) {
                             // Swipe right — go back
                             if (webView.canGoBack()) webView.goBack()
@@ -117,12 +124,16 @@ class MainActivity : Activity() {
                         }
                         return true
                     }
-                } else {
+                }
+                // Swipe down — harus benar-benar dominan vertikal & dari atas
+                else if (absY > absX * DIRECTION_RATIO) {
                     if (diffY > SWIPE_THRESHOLD && Math.abs(velocityY) > SWIPE_VELOCITY) {
-                        // Swipe down — refresh
-                        webView.reload()
-                        Toast.makeText(this@MainActivity, "🔄 Refresh", Toast.LENGTH_SHORT).show()
-                        return true
+                        // Hanya refresh kalau swipe dimulai dari area atas (pull-to-refresh)
+                        if (e1.y < webView.height * 0.25f) {
+                            webView.reload()
+                            Toast.makeText(this@MainActivity, "🔄 Refresh", Toast.LENGTH_SHORT).show()
+                            return true
+                        }
                     }
                 }
                 return false
@@ -206,8 +217,8 @@ class MainActivity : Activity() {
         val bg = GradientDrawable().apply {
             shape = GradientDrawable.OVAL
             colors = intArrayOf(
-                Color.parseColor("#7C4DFF"),
-                Color.parseColor("#6C3FC7")
+                Color.parseColor("#E50914"),
+                Color.parseColor("#B00710")
             )
             gradientType = GradientDrawable.LINEAR_GRADIENT
         }
@@ -460,7 +471,7 @@ class MainActivity : Activity() {
         snackbar.addView(TextView(this).apply {
             text = actionText
             textSize = 13f
-            setTextColor(Color.parseColor("#7C4DFF"))
+            setTextColor(Color.parseColor("#E50914"))
             typeface = Typeface.DEFAULT_BOLD
             setPadding((16 * density).toInt(), 0, 0, 0)
             setOnClickListener {

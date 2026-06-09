@@ -43,7 +43,7 @@ class HomeActivity : Activity() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            setBackgroundColor(Color.parseColor("#0D0D1A"))
+            setBackgroundColor(Color.parseColor("#0A0A0A"))
         }
 
         val root = LinearLayout(this).apply {
@@ -68,8 +68,16 @@ class HomeActivity : Activity() {
         root.addView(TextView(this).apply {
             text = "Pilih situs untuk mulai streaming"
             textSize = 14f
-            setTextColor(Color.parseColor("#88FFFFFF"))
+            setTextColor(Color.parseColor("#B3B3B3"))
             setPadding(0, 0, 0, (28 * density).toInt())
+        })
+
+        // Red accent bar under header
+        root.addView(View(this).apply {
+            layoutParams = LinearLayout.LayoutParams((48 * density).toInt(), (3 * density).toInt()).apply {
+                bottomMargin = (24 * density).toInt()
+            }
+            setBackgroundColor(Color.parseColor("#E50914"))
         })
 
         // Site cards
@@ -117,20 +125,20 @@ class HomeActivity : Activity() {
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, 1
             ).apply { topMargin = (20 * density).toInt(); bottomMargin = (20 * density).toInt() }
-            setBackgroundColor(Color.parseColor("#22FFFFFF"))
+            setBackgroundColor(Color.parseColor("#222222"))
         })
 
         root.addView(TextView(this).apply {
             text = "💡 Tips: Gunakan tombol Menu di remote untuk akses cepat ke bookmark dan ganti situs"
             textSize = 12f
-            setTextColor(Color.parseColor("#66FFFFFF"))
+            setTextColor(Color.parseColor("#666666"))
             setPadding(0, 0, 0, (8 * density).toInt())
         })
 
         root.addView(TextView(this).apply {
-            text = "v2.0 • Build by Buildbox Studio"
+            text = "v2.2.0 • Build by Buildbox Studio"
             textSize = 11f
-            setTextColor(Color.parseColor("#44FFFFFF"))
+            setTextColor(Color.parseColor("#444444"))
             setPadding(0, (16 * density).toInt(), 0, 0)
         })
 
@@ -148,11 +156,11 @@ class HomeActivity : Activity() {
             background = GradientDrawable().apply {
                 cornerRadius = 16f
                 colors = intArrayOf(
-                    Color.parseColor("#1A1A2E"),
-                    Color.parseColor("#16213E")
+                    Color.parseColor("#1E1E1E"),
+                    Color.parseColor("#141414")
                 )
                 gradientType = GradientDrawable.LINEAR_GRADIENT
-                setStroke(1, Color.parseColor("#33FFFFFF"))
+                setStroke(1, Color.parseColor("#2A2A2A"))
             }
             setPadding(
                 (16 * density).toInt(),
@@ -166,11 +174,11 @@ class HomeActivity : Activity() {
             setOnFocusChangeListener { v, hasFocus ->
                 val bg = v.background as? GradientDrawable
                 if (hasFocus) {
-                    bg?.setStroke(2, Color.parseColor("#7C4DFF"))
+                    bg?.setStroke((2 * density).toInt(), Color.parseColor("#E50914"))
                     v.scaleX = 1.05f
                     v.scaleY = 1.05f
                 } else {
-                    bg?.setStroke(1, Color.parseColor("#33FFFFFF"))
+                    bg?.setStroke(1, Color.parseColor("#2A2A2A"))
                     v.scaleX = 1f
                     v.scaleY = 1f
                 }
@@ -221,7 +229,7 @@ class HomeActivity : Activity() {
             )
             background = GradientDrawable().apply {
                 cornerRadius = 12f
-                setColor(Color.parseColor("#1AFFFFFF"))
+                setColor(Color.parseColor("#1A1A1A"))
             }
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -233,8 +241,13 @@ class HomeActivity : Activity() {
 
             setOnFocusChangeListener { v, hasFocus ->
                 val bg = v.background as? GradientDrawable
-                if (hasFocus) bg?.setColor(Color.parseColor("#33FFFFFF"))
-                else bg?.setColor(Color.parseColor("#1AFFFFFF"))
+                if (hasFocus) {
+                    bg?.setColor(Color.parseColor("#2A1416"))
+                    bg?.setStroke((2 * density).toInt(), Color.parseColor("#E50914"))
+                } else {
+                    bg?.setColor(Color.parseColor("#1A1A1A"))
+                    bg?.setStroke(0, Color.TRANSPARENT)
+                }
             }
 
             setOnClickListener { openSite(item.url) }
@@ -256,7 +269,7 @@ class HomeActivity : Activity() {
             addView(TextView(this@HomeActivity).apply {
                 text = "›"
                 textSize = 18f
-                setTextColor(Color.parseColor("#66FFFFFF"))
+                setTextColor(Color.parseColor("#888888"))
             })
         }
     }

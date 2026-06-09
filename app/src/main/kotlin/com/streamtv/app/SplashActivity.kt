@@ -39,7 +39,7 @@ class SplashActivity : Activity() {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            setBackgroundColor(Color.parseColor("#0D0D1A"))
+            setBackgroundColor(Color.parseColor("#0A0A0A"))
         }
 
         val centerLayout = LinearLayout(this).apply {
@@ -55,7 +55,7 @@ class SplashActivity : Activity() {
         val iconText = TextView(this).apply {
             text = "▶"
             textSize = 64f
-            setTextColor(Color.parseColor("#7C4DFF"))
+            setTextColor(Color.parseColor("#E50914"))
             gravity = Gravity.CENTER
             setPadding(0, 0, 0, (16 * density).toInt())
         }
@@ -92,7 +92,7 @@ class SplashActivity : Activity() {
 
         // Version at bottom
         val version = TextView(this).apply {
-            text = "v2.1.0 • Build by Buildbox Studio"
+            text = "v2.2.0 • Build by Buildbox Studio"
             textSize = 11f
             setTextColor(Color.parseColor("#44FFFFFF"))
             gravity = Gravity.CENTER

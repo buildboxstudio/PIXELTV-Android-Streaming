@@ -2,7 +2,7 @@
 
 PIXELTV - Android TV & Mobile streaming app with built-in ad blocker, multi-site support, bookmark, history, and D-pad navigation. Features draggable floating menu, modern glassmorphism UI, and fullscreen video handler. Built with Kotlin + WebView.
 
-**Version:** 2.1.0  
+**Version:** 2.2.0  
 **Build by:** [Buildbox Studio](https://www.tiktok.com/@buildbox.studio)
 
 ---
@@ -138,6 +138,7 @@ PIXELTV - Android TV & Mobile streaming app with built-in ad blocker, multi-site
 | 1 | iDlix | z1.idlixku.com |
 | 2 | LK21 | tv10.lk21official.cc |
 | 3 | Rebahin | rebahinxxi3.beauty |
+| 4 | Nobargasi | www.nobargasi.my.id |
 
 > Sites can be added/changed in `SiteManager.kt`
 
@@ -171,6 +172,17 @@ StreamTV/
 ---
 
 ## Changelog
+
+### v2.2.0
+- NEW: **Red / Black / Grey theme** — complete UI redesign across all screens (splash, home, menu, player)
+- NEW: Added **Nobargasi** streaming site
+- FIX: Swipe gestures too sensitive on phone — drastically increased thresholds
+  - Swipe distance: 100px → 250px
+  - Swipe velocity: 100 → 1200
+  - Direction must be clearly dominant (2.5x ratio)
+  - Swipe-down refresh only triggers from top 25% of screen (pull-to-refresh style)
+  - TV remote navigation unaffected
+- Added centralized `AppTheme.kt` color palette
 
 ### v2.1.0
 - NEW: **JS Navigation Layer** for Android TV remote

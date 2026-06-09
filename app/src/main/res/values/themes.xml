@@ -4,8 +4,8 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowBackground">@android:color/black</item>
-        <item name="android:colorPrimary">#6C3FC7</item>
-        <item name="android:colorPrimaryDark">#1A0A2E</item>
-        <item name="android:colorAccent">#FF4D8D</item>
+        <item name="android:colorPrimary">#E50914</item>
+        <item name="android:colorPrimaryDark">#0A0A0A</item>
+        <item name="android:colorAccent">#E50914</item>
     </style>
 </resources>

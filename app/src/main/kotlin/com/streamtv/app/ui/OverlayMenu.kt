@@ -31,7 +31,7 @@ class OverlayMenu(
 ) {
 
     companion object {
-        const val APP_VERSION = "2.1.0"
+        const val APP_VERSION = "2.2.0"
         const val CREDIT_URL = "https://www.tiktok.com/@buildbox.studio"
     }
 
@@ -40,11 +40,11 @@ class OverlayMenu(
             shape = GradientDrawable.RECTANGLE
             cornerRadius = 28f
             colors = intArrayOf(
-                Color.parseColor("#E6181828"),
-                Color.parseColor("#E6101020")
+                Color.parseColor("#F21A1A1A"),
+                Color.parseColor("#F20A0A0A")
             )
             gradientType = GradientDrawable.LINEAR_GRADIENT
-            setStroke(2, Color.parseColor("#33FFFFFF"))
+            setStroke(2, Color.parseColor("#E50914"))
         }
     }
 
@@ -52,7 +52,7 @@ class OverlayMenu(
         return GradientDrawable().apply {
             shape = GradientDrawable.RECTANGLE
             cornerRadius = 16f
-            setColor(Color.parseColor("#1AFFFFFF"))
+            setColor(Color.parseColor("#1F1F1F"))
         }
     }
 
@@ -102,7 +102,7 @@ class OverlayMenu(
             addView(TextView(context).apply {
                 text = "›"
                 textSize = 20f
-                setTextColor(Color.parseColor("#66FFFFFF"))
+                setTextColor(Color.parseColor("#888888"))
             })
 
             setOnClickListener { onClick() }
@@ -110,10 +110,13 @@ class OverlayMenu(
             // Focus highlight for TV remote
             isFocusable = true
             setOnFocusChangeListener { v, hasFocus ->
+                val bg = v.background as? GradientDrawable
                 if (hasFocus) {
-                    (v.background as? GradientDrawable)?.setColor(Color.parseColor("#33FFFFFF"))
+                    bg?.setColor(Color.parseColor("#2A1416"))
+                    bg?.setStroke((2 * density).toInt(), Color.parseColor("#E50914"))
                 } else {
-                    (v.background as? GradientDrawable)?.setColor(Color.parseColor("#1AFFFFFF"))
+                    bg?.setColor(Color.parseColor("#1F1F1F"))
+                    bg?.setStroke(0, Color.TRANSPARENT)
                 }
             }
         }
@@ -176,7 +179,7 @@ class OverlayMenu(
         rootLayout.addView(TextView(context).apply {
             text = "Streaming Menu"
             textSize = 12f
-            setTextColor(Color.parseColor("#88FFFFFF"))
+            setTextColor(Color.parseColor("#B3B3B3"))
             gravity = Gravity.CENTER
             setPadding(0, 0, 0, (20 * density).toInt())
             layoutParams = LinearLayout.LayoutParams(
@@ -209,7 +212,7 @@ class OverlayMenu(
         rootLayout.addView(TextView(context).apply {
             text = "Build by Buildbox Studio"
             textSize = 12f
-            setTextColor(Color.parseColor("#7C4DFF"))
+            setTextColor(Color.parseColor("#E50914"))
             gravity = Gravity.CENTER
             setPadding(0, (12 * density).toInt(), 0, (4 * density).toInt())
             paintFlags = paintFlags or android.graphics.Paint.UNDERLINE_TEXT_FLAG
@@ -227,7 +230,7 @@ class OverlayMenu(
         rootLayout.addView(TextView(context).apply {
             text = "v$APP_VERSION"
             textSize = 10f
-            setTextColor(Color.parseColor("#55FFFFFF"))
+            setTextColor(Color.parseColor("#666666"))
             gravity = Gravity.CENTER
             setPadding(0, (2 * density).toInt(), 0, 0)
             layoutParams = LinearLayout.LayoutParams(
@@ -495,7 +498,7 @@ class OverlayMenu(
         rootLayout.addView(TextView(context).apply {
             text = "Semua riwayat tontonan akan dihapus."
             textSize = 13f
-            setTextColor(Color.parseColor("#88FFFFFF"))
+            setTextColor(Color.parseColor("#B3B3B3"))
             gravity = Gravity.CENTER
             setPadding(0, 0, 0, (20 * density).toInt())
         })
@@ -524,7 +527,7 @@ class OverlayMenu(
             )
             background = GradientDrawable().apply {
                 cornerRadius = 12f
-                setColor(Color.parseColor("#33FFFFFF"))
+                setColor(Color.parseColor("#333333"))
             }
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply {
                 marginEnd = (8 * density).toInt()
@@ -547,7 +550,7 @@ class OverlayMenu(
             )
             background = GradientDrawable().apply {
                 cornerRadius = 12f
-                setColor(Color.parseColor("#CC3333"))
+                setColor(Color.parseColor("#E50914"))
             }
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply {
                 marginStart = (8 * density).toInt()
@@ -575,7 +578,7 @@ class OverlayMenu(
                 topMargin = (12 * density).toInt()
                 bottomMargin = (12 * density).toInt()
             }
-            setBackgroundColor(Color.parseColor("#22FFFFFF"))
+            setBackgroundColor(Color.parseColor("#222222"))
         }
     }
 }
