@@ -1,237 +1,143 @@
-# PIXELTV
+# PIXEL TV ΓÇö Android TV Streaming
 
-PIXELTV - Android TV & Mobile streaming app with built-in ad blocker, multi-site support, bookmark, history, and D-pad navigation. Features draggable floating menu, modern glassmorphism UI, and fullscreen video handler. Built with Kotlin + WebView.
+Aplikasi Android TV native untuk streaming film dan serial dari IDLIX. Arsitektur 100% native Kotlin + Jetpack Compose (`androidx.tv.material3`) + AndroidX Media3 (ExoPlayer). Tanpa WebView atau Chromium.
 
-**Version:** 2.2.0  
-**Build by:** [Buildbox Studio](https://www.tiktok.com/@buildbox.studio)
-
-<img width="1158" height="540" alt="image" src="https://github.com/user-attachments/assets/682addf6-7e01-4770-9f57-6f31cc47c4f3" />
-
-<img width="1158" height="540" alt="image" src="https://github.com/user-attachments/assets/f6d5611c-0042-4771-b179-a887e41b2aa9" />
-
-<img width="1158" height="540" alt="image" src="https://github.com/user-attachments/assets/92efa5c5-a0cf-4486-9980-e7df95858097" />
-
-<img width="1158" height="540" alt="image" src="https://github.com/user-attachments/assets/9bb8d971-8080-4550-97bc-2216fecd63e8" />
-
-
+Proyek terdiri dari dua bagian:
+1. **Android TV Client (`app/`)**: Kotlin, Compose TV, Media3 ExoPlayer. APK ~4 MB, ringan di hardware kelas bawah.
+2. **Backend API (`Backend API/`)**: Fastify TypeScript + Puppeteer stealth ΓÇö bypass Cloudflare, cache, resolve playlist HLS siap putar.
 
 ---
 
-## 🇬🇧 English
+## Fitur Utama
 
-### Features
+### Aplikasi Android TV
+- **100% Native**: Nol WebView. Hardware decoder TV (`MediaCodec`) via Media3 ExoPlayer.
+- **Netflix-Style Leanback UI**:
+  - Sidebar navigasi floating (smooth overlay, tanpa relayout konten).
+  - Billboard Hero dinamis dengan sinopsis dan tombol Putar Cepat.
+  - Swimlane horizontal: Tren, Populer, Serial TV, Genre.
+  - *Lanjutkan Menonton* dengan bar progress visual.
+- **HLS Player dengan Token Query Preserving**: Otomatis tangani proteksi CDN Majorplay (`?t=...`) di sub-playlist dan chunk video.
+- **Subtitle + SubDL**: Subtitle bawaan IDLIX (Indonesia/English) + pencarian subtitle alternatif via SubDL.com.
+- **Bilingual**: Indonesia dan English, mengikuti bahasa sistem TV.
+- **D-pad Full**: Didesain untuk remote TV biasa, tanpa sentuh.
 
-- ✅ **Splash Screen** — animated logo on launch
-- ✅ **Home Screen** — pick a site or continue watching
-- ✅ **Search** — search movies directly from the app
-- ✅ **Gesture Navigation** — swipe left (switch site), swipe right (go back), swipe down (refresh)
-- ✅ **Confirm Exit** — no more accidental exits
-- ✅ **Snackbar Notifications** — error messages with retry button
-- ✅ Fullscreen WebView with ad blocker
-- ✅ Compatible with Android TV (D-pad native focus navigation)
-- ✅ Compatible with Phone/Tablet (touch + gestures)
-- ✅ Fullscreen video handler
-- ✅ Custom User-Agent (desktop browser)
-- ✅ Hardware acceleration
-- ✅ Keep screen on while streaming
-- ✅ Immersive mode (hide status bar & nav bar)
-- ✅ Bookmark — save favorite pages
-- ✅ History — automatic watch history
-- ✅ Multi-site — 3 streaming sites, switch with CH+/CH- or swipe
-- ✅ Draggable floating button — move anywhere, position saved
-- ✅ Modern overlay menu — glassmorphism design with animation
-- ✅ Media control — Play/Pause video via remote
-- ✅ Anti auto-refresh (fix idle reload)
-- ✅ Block popup & ad redirects
-
-### TV Remote Navigation
-
-| Button | Function |
-|--------|----------|
-| D-pad | Move focus between elements |
-| OK / Center | Click focused element |
-| Back | Go back / Confirm exit |
-| Menu | Open overlay menu |
-| Info/Guide | Quick bookmark |
-| CH+ / CH- | Switch streaming site |
-| Play/Pause | Play/pause video |
-| Search | Open search dialog |
-
-### Phone/Tablet Gestures
-
-| Gesture | Function |
-|---------|----------|
-| Swipe Left | Switch to next site |
-| Swipe Right | Go back |
-| Swipe Down | Refresh page |
-| Tap ▶ button | Open menu |
-| Drag ▶ button | Move button |
-| Long press ▶ | Quick bookmark |
-
-### Minimum Requirements
-
-- Android 5.0 (API 21)
-- Target: Android 14 (API 34)
-- Kotlin 1.9+
+### Backend API
+- **Cloudflare Bypass**: Stealth browser di server, automatis.
+- **In-Memory LRU Cache**: Respons katalog <15ms.
+- **One-Shot Playback Resolver**: `/api/playback/resolve` menyelesaikan gate token, countdown, session claim, dan playlist HLS dalam satu panggilan.
+- **Ringan**: Docker image <1GB RAM, bisa jalan di VPS 1ΓÇô2GB.
 
 ---
 
-## 🇮🇩 Bahasa Indonesia
-
-### Fitur
-
-- ✅ **Splash Screen** — logo animasi saat buka app
-- ✅ **Home Screen** — pilih situs atau lanjut nonton
-- ✅ **Search** — cari film langsung dari app
-- ✅ **Gesture Navigation** — swipe kiri (ganti situs), swipe kanan (kembali), swipe bawah (refresh)
-- ✅ **Confirm Exit** — nggak lagi keluar nggak sengaja
-- ✅ **Snackbar Notifications** — pesan error dengan tombol retry
-- ✅ WebView fullscreen dengan ad blocker
-- ✅ Kompatibel Android TV (navigasi D-pad native)
-- ✅ Kompatibel HP/Tablet (touch + gesture)
-- ✅ Fullscreen video handler
-- ✅ Custom User-Agent (desktop browser)
-- ✅ Hardware acceleration
-- ✅ Layar tetap nyala saat streaming
-- ✅ Immersive mode
-- ✅ Bookmark — simpan halaman favorit
-- ✅ History — riwayat tontonan otomatis
-- ✅ Multi-site — 3 situs streaming
-- ✅ Floating button draggable
-- ✅ Menu overlay modern — glassmorphism
-- ✅ Media control — Play/Pause via remote
-- ✅ Anti auto-refresh
-- ✅ Block popup & redirect iklan
-
-### Navigasi Remote TV
-
-| Tombol | Fungsi |
-|--------|--------|
-| D-pad | Pindah focus antar elemen |
-| OK / Center | Klik elemen yang di-focus |
-| Back | Kembali / Confirm keluar |
-| Menu | Buka overlay menu |
-| Info/Guide | Quick bookmark |
-| CH+ / CH- | Ganti situs streaming |
-| Play/Pause | Play/pause video |
-| Search | Buka dialog pencarian |
-
-### Gesture HP/Tablet
-
-| Gesture | Fungsi |
-|---------|--------|
-| Swipe Kiri | Ganti ke situs berikutnya |
-| Swipe Kanan | Kembali |
-| Swipe Bawah | Refresh halaman |
-| Tap tombol ▶ | Buka menu |
-| Drag tombol ▶ | Pindahkan button |
-| Long press ▶ | Quick bookmark |
-
----
-
-## Streaming Sites
-
-| # | Site | URL |
-|---|------|-----|
-| 1 | iDlix | z1.idlixku.com |
-| 2 | LK21 | tv10.lk21official.cc |
-| 3 | Rebahin | rebahinxxi3.beauty |
-| 4 | Nobargasi | www.nobargasi.my.id |
-
-> Sites can be added/changed in `SiteManager.kt`
-
----
-
-## Project Structure
+## Struktur Direktori
 
 ```
-StreamTV/
-├── app/src/main/
-│   ├── kotlin/com/streamtv/app/
-│   │   ├── SplashActivity.kt         # Splash screen
-│   │   ├── HomeActivity.kt           # Home / site picker
-│   │   ├── MainActivity.kt           # WebView player
-│   │   ├── data/
-│   │   │   ├── BookmarkManager.kt    # Bookmark CRUD
-│   │   │   ├── HistoryManager.kt     # History tracking
-│   │   │   └── SiteManager.kt        # Multi-site config
-│   │   └── ui/
-│   │       └── OverlayMenu.kt        # Modern overlay menu
-│   ├── res/
-│   │   ├── drawable/                  # Icons & banner
-│   │   ├── mipmap-*/                  # App icon (PIXELTV)
-│   │   └── values/                    # Strings & themes
-│   └── AndroidManifest.xml
-├── build.gradle.kts
-├── settings.gradle.kts
-└── gradle.properties
+pixeltv-androidtv/
+Γö£ΓöÇΓöÇ app/                                 # Aplikasi Android TV (Kotlin + Compose)
+Γöé   Γö£ΓöÇΓöÇ src/main/java/com/idlix/tv/
+Γöé   Γöé   Γö£ΓöÇΓöÇ data/
+Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ api/                     # Retrofit client & API definitions
+Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ local/                   # WatchHistoryStore
+Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ model/                   # Data class & JSON serializers
+Γöé   Γöé   Γöé   ΓööΓöÇΓöÇ repository/              # IdlixRepository & SubdlRepository
+Γöé   Γöé   Γö£ΓöÇΓöÇ ui/
+Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ components/              # TvNavDrawer, TvMovieCard, TvHeroBillboard
+Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ navigation/              # AppNavigation (drawer + routes)
+Γöé   Γöé   Γöé   Γö£ΓöÇΓöÇ screens/                 # Home, Movies, Series, Detail, Player, Settings
+Γöé   Γöé   Γöé   ΓööΓöÇΓöÇ theme/                   # Tema warna & style Leanback
+Γöé   Γöé   ΓööΓöÇΓöÇ res/                         # Asset visual & localization (en, id, in)
+Γöé   ΓööΓöÇΓöÇ build.gradle.kts
+Γöé
+Γö£ΓöÇΓöÇ Backend API/                         # Service Backend (Node.js / Docker)
+Γöé   Γö£ΓöÇΓöÇ src/
+Γöé   Γöé   Γö£ΓöÇΓöÇ engine/                      # Puppeteer Stealth Scraper & Token Resolver
+Γöé   Γöé   Γö£ΓöÇΓöÇ routes/                      # REST endpoints Fastify (/api/...)
+Γöé   Γöé   ΓööΓöÇΓöÇ services/                    # CacheService (LRU memory)
+Γöé   Γö£ΓöÇΓöÇ Dockerfile
+Γöé   Γö£ΓöÇΓöÇ docker-compose.yml
+Γöé   ΓööΓöÇΓöÇ package.json
+Γöé
+Γö£ΓöÇΓöÇ gradle/                              # Gradle wrapper & version catalogs
+Γö£ΓöÇΓöÇ build.gradle.kts
+Γö£ΓöÇΓöÇ settings.gradle.kts
+Γö£ΓöÇΓöÇ gradle.properties
+Γö£ΓöÇΓöÇ local.properties                     # Konfigurasi lokal (git-ignored)
+ΓööΓöÇΓöÇ .gitignore
 ```
 
 ---
 
-## Changelog
+## Memulai
 
-### v2.2.0
-- NEW: **Red / Black / Grey theme** — complete UI redesign across all screens (splash, home, menu, player)
-- NEW: Added **Nobargasi** streaming site
-- FIX: Swipe gestures too sensitive on phone — drastically increased thresholds
-  - Swipe distance: 100px → 250px
-  - Swipe velocity: 100 → 1200
-  - Direction must be clearly dominant (2.5x ratio)
-  - Swipe-down refresh only triggers from top 25% of screen (pull-to-refresh style)
-  - TV remote navigation unaffected
-- Added centralized `AppTheme.kt` color palette
+### Unduh versi terbaru
 
-### v2.1.0
-- NEW: **JS Navigation Layer** for Android TV remote
-  - Scans all clickable elements on page
-  - D-pad moves between elements based on spatial position (nearest in direction)
-  - Yellow highlight border shows which element is selected
-  - OK/Enter clicks the highlighted element
-  - Auto-scroll when navigating to off-screen elements
-  - Auto-rescan on page changes (MutationObserver)
-  - Falls back to page scroll if no element found in direction
-- IMPROVED: TV remote now actually usable for browsing & selecting movies
-- IMPROVED: Navigation feels like a native TV app
+Unduh **`PixelTV.5.0.2.apk`** dari [GitHub Releases](https://github.com/buildboxstudio/PIXELTV-Android-Streaming/releases/latest). Untuk pemasangan pertama v5.x, uninstall versi lama terlebih dahulu karena package aplikasi berubah.
 
-### v2.0
-- NEW: Splash screen with animated logo
-- NEW: Home screen — site picker + continue watching
-- NEW: Search dialog — search movies on current site
-- NEW: Gesture navigation — swipe left/right/down
-- NEW: Confirm exit dialog (Back when can't go back)
-- NEW: Snackbar with retry button on error
-- NEW: Home button in exit dialog to go back to site picker
-- IMPROVED: App flow: Splash → Home → Player
-- IMPROVED: 3-activity architecture for better UX
+### 1. Jalankan Backend API
 
-### v1.5.1
-- Fix menu can't scroll — wrapped in ScrollView
+#### Opsi A: Docker (Direkomendasikan)
+```bash
+cd "Backend API"
+docker compose up -d --build
+curl http://localhost:5376/health
+```
 
-### v1.5
-- Floating button now draggable
-- Menu overlay redesign — glassmorphism style
-- Update Rebahin URL
+#### Opsi B: Node.js Lokal
+```bash
+cd "Backend API"
+npm install
+npm run build
+npm start
+```
 
-### v1.4.2
-- Added credit & version in menu
+### 2. Pasang APK ke Android TV
 
-### v1.4
-- Removed virtual cursor
-- D-pad pass-through to WebView
-- Fixed "back to home" bug
+#### Untuk Pengguna Biasa
+1. Aktifkan **Sumber Tidak Dikenal** di TV (Settings > Apps > Security > Install unknown apps).
+2. Salin file APK ke flashdisk atau kirim via *Send Files to TV*.
+3. Buka file APK di TV, pilih **Install**.
 
-### v1.3
-- Block auto-refresh
-- Block ad redirects
+#### Untuk Developer (via ADB)
+```bash
+adb connect 192.168.x.x:5555
+adb install -r app/build/outputs/apk/release/app-release.apk
+adb shell monkey -p com.pixeltv.tv -c android.intent.category.LAUNCHER 1
+```
 
-### v1.2
-- Renamed to PIXELTV
-- Updated icon & theme
+### 3. Konfigurasi Server (Opsional)
 
-### v1.0
-- Initial release
+APK sudah terkonfigurasi dengan server IDLIX publik. Kalau ingin pakai server sendiri:
+- Buka aplikasi > **Settings** di sidebar > masukkan URL server > **Test Connection** > **Save**.
 
 ---
 
-**Build by [Buildbox Studio](https://www.tiktok.com/@buildbox.studio)**
+## Endpoint REST API
+
+| Method | Endpoint | Keterangan |
+| :--- | :--- | :--- |
+| `GET` | `/health` | Status server dan engine scraper |
+| `GET` | `/api/movies` | Daftar film (pagination, sort, genre) |
+| `GET` | `/api/series` | Daftar serial TV |
+| `GET` | `/api/movies/:slug` | Detail film + sinopsis + cast |
+| `GET` | `/api/series/:slug` | Detail serial + episode per season |
+| `GET` | `/api/search?q=:keyword` | Pencarian film / serial |
+| `GET` | `/api/playback/resolve` | Playlist HLS + subtitle siap putar |
+
+---
+
+## Build dari Source
+
+Lihat [PANDUAN_BUILD_RELEASE.md](PANDUAN_BUILD_RELEASE.md) untuk prasyarat JDK 21, konfigurasi keystore dan `local.properties`, build release, serta verifikasi signature.
+
+---
+
+## Keamanan
+
+`local.properties`, keystore (`*.jks`), dan credential environment dilindungi oleh `.gitignore`. Jangan pernah masukkan password atau secret ke dalam repo.
+
+---
+
+## Summary (English)
+
+PIXEL TV is a native Android TV streaming app for IDLIX, built with Kotlin + Jetpack Compose (`androidx.tv.material3`) + Media3 ExoPlayer. It is a complete rewrite from the ground up ΓÇö no WebView, no Chromium, ~4 MB APK. The accompanying Backend API handles Cloudflare bypass, content scraping, and HLS playlist resolution. Compatible with Android TV, Google TV, Android TV boxes, and any device running Android 7.0 (API 26) or higher. D-pad remote fully supported.
