@@ -1,12 +1,8 @@
 name: Build on Runner & Deploy Artifact to VPS (PM2)
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'Backend API/**'
-      - '.github/workflows/deploy-backend.yml'
+  # Nonaktifkan deploy otomatis sampai secret VPS diisi.
+  # Jalankan manual dari tab Actions > "Build on Runner & Deploy Artifact to VPS" > Run workflow.
   workflow_dispatch:
 
 jobs:
