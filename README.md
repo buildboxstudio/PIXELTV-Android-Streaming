@@ -1,4 +1,6 @@
-# PIXEL TV Android TV Streaming
+# PIXEL TV Android TV Streaming v5.0.3
+
+[![image_2026-10-31_115353562.png](https://s8d6.turboimg.net/sp/f6cce1746640adf912a6ba4f9913750d/image_2026-10-31_115353562.png)](https://www.turboimagehost.com/p/131208537/image_2026-10-31_115353562.png.html)
 
 Aplikasi Android TV native untuk streaming film dan serial dari IDLIX. Arsitektur 100% native Kotlin + Jetpack Compose (`androidx.tv.material3`) + AndroidX Media3 (ExoPlayer). Tanpa WebView atau Chromium.
 
@@ -37,19 +39,12 @@ Proyek terdiri dari dua bagian:
 Unduh **`PixelTV.5.0.2.apk`** dari [GitHub Releases](https://github.com/buildboxstudio/PIXELTV-Android-Streaming/releases/latest). Untuk pemasangan pertama v5.x, uninstall versi lama terlebih dahulu karena package aplikasi berubah.
 
 ```
-```
 ### Pasang APK ke Android TV
 
 #### Untuk Pengguna Biasa
 1. Aktifkan **Sumber Tidak Dikenal** di TV (Settings > Apps > Security > Install unknown apps).
 2. Salin file APK ke flashdisk atau kirim via *Send Files to TV*.
 3. Buka file APK di TV, pilih **Install**.
-
-#### Untuk Developer (via ADB)
-```bash
-adb connect 192.168.x.x:5555
-adb install -r app/build/outputs/apk/release/app-release.apk
-adb shell monkey -p com.pixeltv.tv -c android.intent.category.LAUNCHER 1
 ```
 ---
 
