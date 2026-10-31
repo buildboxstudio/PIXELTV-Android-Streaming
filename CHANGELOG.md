@@ -25,25 +25,24 @@ Semua perubahan signifikan didokumentasikan di sini. Format mengikuti [Keep a Ch
 ### Lainnya
 - Workflow CI/CD GitHub Actions: build TypeScript di runner → SCP artifact ke VPS → PM2 restart
 - Dokumen lengkap: README, PANDUAN_INSTALASI_TV, PANDUAN_BUILD_RELEASE
-- Keystore `idlix-release.jks` (id: `idlix-release.jks`, alias `idlixtv`)
+- Release signing memakai alias `idlixtv`; jangan unggah keystore atau password ke repo.
 
 ---
 
-## [4.0.4] — 2025-10-25
+## [4.0.4] — 2026-10-25
 - Koreksi signing config
 - Perbaikan build output metadata
 
-## [4.0.3] — 2025-10-25
+## [4.0.3] — 2026-10-25
 - Perbaikan path di workflow deploy
 
-## [4.0.2] — 2025-10-25
+## [4.0.2] — 2026-10-25
 - Perbaikan workflow trigger condition
 
-## [4.0.1] — 2025-10-25
+## [4.0.1] — 2026-10-25
 - Perbaikan deploy artifact script
 
-## [4.0.0] — 2025-10-24
-- Branch `clean502` dimulai dari IdlixAndroidTV fork
+## [4.0.0] — 2026-10-24
 - Namespace `com.idlix.tv` → `com.pixeltv.tv` (applicationId)
 - Penambahan `Backend API/`, workflow GitHub Actions, dokumentasi
 - Aplikasi label: "Pixel TV"

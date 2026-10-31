@@ -1,9 +1,5 @@
 # PIXEL TV — Android TV Streaming
 
-<p align="center">
-  <img width="460" height="300" src="https://cdn.abdilah.id/uploads/com.idlix.tv-preview.jpeg">
-</p>
-
 Aplikasi Android TV native untuk streaming film dan serial dari IDLIX. Arsitektur 100% native Kotlin + Jetpack Compose (`androidx.tv.material3`) + AndroidX Media3 (ExoPlayer). Tanpa WebView atau Chromium.
 
 Proyek terdiri dari dua bagian:
@@ -74,6 +70,10 @@ pixeltv-androidtv/
 
 ## Memulai
 
+### Unduh versi terbaru
+
+Unduh **`PixelTV.5.0.2.apk`** dari [GitHub Releases](https://github.com/buildboxstudio/PIXELTV-Android-Streaming/releases/latest). Untuk pemasangan pertama v5.x, uninstall versi lama terlebih dahulu karena package aplikasi berubah.
+
 ### 1. Jalankan Backend API
 
 #### Opsi A: Docker (Direkomendasikan)
@@ -128,7 +128,7 @@ APK sudah terkonfigurasi dengan server IDLIX publik. Kalau ingin pakai server se
 
 ## Build dari Source
 
-Lihat [PANDUAN_BUILD_RELEASE.md](PANDUAN_BUILD_RELEASE.md) untuk panduan lengkap: prasyarat JDK 21,-setup keystore, konfigurasi `local.properties`, build release, verifikasi signature.
+Lihat [PANDUAN_BUILD_RELEASE.md](PANDUAN_BUILD_RELEASE.md) untuk prasyarat JDK 21, konfigurasi keystore dan `local.properties`, build release, serta verifikasi signature.
 
 ---
 
