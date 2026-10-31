@@ -1,0 +1,95 @@
+name: Build on Runner & Deploy Artifact to VPS (PM2)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Backend API/**'
+      - '.github/workflows/deploy-backend.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-ship:
+    name: Build on Runner & Ship to VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: 'Backend API/package-lock.json'
+
+      # Step 1: Build TypeScript di GitHub Runner (CPU/RAM VPS tidak terbebani)
+      - name: Install Dependencies & Build TypeScript
+        run: |
+          cd "Backend API"
+          npm ci
+          npm run build
+
+      # Step 2: Kompresi bundle produksi menjadi release.tar.gz
+      - name: Compress Production Artifact
+        run: |
+          cd "Backend API"
+          tar -czf release.tar.gz dist package*.json ecosystem.config.cjs
+
+      # Step 3: Kirim file terkompresi ke VPS via SCP aman
+      - name: Transfer Artifact to VPS via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          source: "Backend API/release.tar.gz"
+          target: ${{ secrets.VPS_TARGET_DIR }}
+          strip_components: 1
+
+      # Step 4: Ekstrak artifact & restart PM2 di VPS
+      - name: Unpack & Restart PM2 on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT || 22 }}
+          script: |
+            set -e
+            echo "📦 Unpacking artifact di VPS..."
+            cd "${{ secrets.VPS_TARGET_DIR }}"
+            
+            # Ekstrak release
+            tar -xzf release.tar.gz
+            rm -f release.tar.gz
+            
+            # Muat environment PATH Node jika ada
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" || true
+            export PATH="$PATH:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -n 1)/bin:/usr/local/bin:/usr/bin:~/.npm-global/bin"
+            
+            echo "📥 Menginstall dependensi production saja (--omit=dev)..."
+            npm ci --omit=dev
+            
+            # Pastikan Chrome untuk Puppeteer terpasang di VPS
+            npx puppeteer browsers install chrome || true
+            
+            echo "🔄 Merestart aplikasi dengan PM2..."
+            # Pastikan PM2 tersedia
+            command -v pm2 >/dev/null 2>&1 || npm install -g pm2
+            
+            # Gunakan pm2 startOrReload (otomatis reload jika sudah ada, atau start jika baru)
+            pm2 startOrReload ecosystem.config.cjs --env production --update-env
+            pm2 save || true
+            
+            echo "⏳ Menunggu server ready..."
+            sleep 8
+            
+            echo "🩺 Memeriksa health check..."
+            curl -f http://localhost:5376/health || (echo "Health check gagal! Menampilkan log PM2:" && pm2 logs idlix-backend-api --lines 40 --nostream && exit 1)
+            
+            echo "🎉 Deploy artifact ke VPS berhasil tanpa kompilasi di server!"

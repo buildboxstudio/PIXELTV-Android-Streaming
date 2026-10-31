@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  idlix-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: idlix-backend-api
+    restart: unless-stopped
+    ports:
+      - "5376:5376"
+    environment:
+      - PORT=5376
+      - HOST=0.0.0.0
+      - IDLIX_BASE_URL=https://z2.idlixku.com
+      - LOG_LEVEL=info
+    # Cap memory usage so it never hogs the VPS
+    deploy:
+      resources:
+        limits:
+          memory: 1024M
+        reservations:
+          memory: 256M
+    # Optional shared memory volume for Chromium performance
+    shm_size: '256mb'

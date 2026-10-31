@@ -1,0 +1,71 @@
+# ==========================================
+# Sensitive Files & Credentials
+# ==========================================
+local.properties
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+google-services.json
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# Android & Gradle Build Artifacts
+# ==========================================
+.gradle/
+.kotlin/
+build/
+**/build/
+bin/
+gen/
+out/
+classes/
+*.dex
+*.class
+
+# Packages & Binary Outputs
+*.apk
+*.ap_
+*.aab
+
+# Proguard / R8 Output
+proguard/
+**/proguard-rules.pro.dump
+
+# ==========================================
+# IDE & System Junk
+# ==========================================
+.idea/
+*.iml
+.vscode/
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Logs & Captures
+*.log
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ==========================================
+# Backend & Node.js Artifacts
+# ==========================================
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==========================================
+# AI Agents & Local Tooling Cache
+# ==========================================
+.agents/
+.playwright-mcp/
