@@ -1,6 +1,10 @@
 # PIXEL TV Android TV Streaming v5.0.4
 
-[![image_2026-10-31_115353562.png](https://s8d6.turboimg.net/sp/f6cce1746640adf912a6ba4f9913750d/image_2026-10-31_115353562.png)](https://www.turboimagehost.com/p/131208537/image_2026-10-31_115353562.png.html)
+<p align="center">
+  <a href="https://ibb.co.com/gZ22SWvK">
+    <img src="https://i.ibb.co.com/LdFFxgQ7/image-2026-11-22-160253869.png" alt="image-2026-11-22-160253869.png" width="800">
+  </a>
+</p>
 
 Aplikasi Android TV native untuk streaming film dan serial dari IDLIX. Dibangun dengan Kotlin, Jetpack Compose (`androidx.tv.material3`), dan AndroidX Media3 (ExoPlayer), dengan ukuran APK sekitar 4 MB yang ringan di hardware TV kelas bawah.
 
